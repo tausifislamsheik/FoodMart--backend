@@ -10,6 +10,7 @@ import { categoryRouter } from "./modules/category/category.router";
 import { userRouter } from "./modules/user/user.router";
 import { orderRouter } from "./modules/order/order.router";
 import { reviewRouter } from "./modules/review/review.router";
+import { cartRouter } from "./modules/cart/cart.router";
 
 
 
@@ -33,6 +34,8 @@ app.use("/api/providers", providerRouter);
 app.use("/api/categories", categoryRouter);
 
 app.use("/api/meals", mealRouter);
+
+app.use("/api/carts", cartRouter);
 
 app.use("/api/orders", orderRouter);
 
