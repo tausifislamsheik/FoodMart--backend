@@ -6,6 +6,9 @@ import { providerController } from "./provider.controller";
 const router = express.Router();
 
 
+router.get("/", providerController.getAllProviders);
+
+router.get("/:id", providerController.getProviderById);
 
 router.post(
   "/profile",
@@ -13,7 +16,18 @@ router.post(
   providerController.createProviderProfile,
 );
 
+router.patch(
+  "/:id",
+  auth(UserRole.PROVIDER),
+  providerController.updateProviderProfile,
+);
 
+
+router.delete(
+  "/:id",
+  auth(UserRole.ADMIN),
+  providerController.deleteProviderProfile,
+);
 
 
 export const providerRouter: Router = router; 
