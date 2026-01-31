@@ -3,6 +3,8 @@ import express, { Application } from "express";
 import { auth } from "./lib/auth";
 import cors from "cors";
 import { providerRouter } from "./modules/provider/provider.router";
+import { notFound } from "./middlewares/notFound";
+import errorHandler from "./middlewares/globalErrorHandler";
 
 
 
@@ -24,5 +26,9 @@ app.use("/api/providers", providerRouter);
 app.get("/", (req, res) => {
   res.send("FoodMart server is running....");
 });
+
+app.use(notFound);
+
+app.use(errorHandler);
 
 export default app;
