@@ -2,6 +2,7 @@ import { toNodeHandler } from "better-auth/node";
 import express, { Application } from "express";
 import { auth } from "./lib/auth";
 import cors from "cors";
+import { providerRouter } from "./modules/provider/provider.router";
 
 
 
@@ -17,6 +18,8 @@ app.use(
 app.use(express.json());
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
+
+app.use("/api/providers", providerRouter);
 
 app.get("/", (req, res) => {
   res.send("FoodMart server is running....");
