@@ -7,6 +7,7 @@ import { notFound } from "./middlewares/notFound";
 import errorHandler from "./middlewares/globalErrorHandler";
 import { mealRouter } from "./modules/meal/meal.router";
 import { categoryRouter } from "./modules/category/category.router";
+import { userRouter } from "./modules/user/user.router";
 
 
 
@@ -22,6 +23,8 @@ app.use(
 app.use(express.json());
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
+
+app.use("/api/users", userRouter);
 
 app.use("/api/providers", providerRouter);
 
