@@ -5,6 +5,7 @@ import cors from "cors";
 import { providerRouter } from "./modules/provider/provider.router";
 import { notFound } from "./middlewares/notFound";
 import errorHandler from "./middlewares/globalErrorHandler";
+import { mealRouter } from "./modules/meal/meal.router";
 
 
 
@@ -22,6 +23,8 @@ app.use(express.json());
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
 app.use("/api/providers", providerRouter);
+
+app.use("/api/meals", mealRouter);
 
 app.get("/", (req, res) => {
   res.send("FoodMart server is running....");
