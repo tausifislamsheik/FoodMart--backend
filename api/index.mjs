@@ -299,7 +299,28 @@ var auth = betterAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }
-  }
+  },
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60
+      // 5 minutes
+    }
+  },
+  advanced: {
+    cookiePrefix: "better-auth",
+    useSecureCookies: process.env.NODE_ENV === "production",
+    crossSubDomainCookies: {
+      enabled: false
+    },
+    disableCSRFCheck: true
+    // Allow requests without Origin header (Postman, mobile apps, etc.)
+  },
+  crossSubDomainCookies: {
+    enabled: false
+  },
+  disableCSRFCheck: true
+  // Allow requests without Origin header (Postman, mobile apps, etc.)
 });
 
 // src/app.ts
@@ -1919,10 +1940,29 @@ var cartRouter = router7;
 
 // src/app.ts
 var app = express8();
+var allowedOrigins = [
+  process.env.APP_URL || "http://localhost:4000",
+  process.env.PROD_APP_URL,
+  // Production frontend URL
+  "http://localhost:3000",
+  "http://localhost:4000",
+  "http://localhost:5000"
+].filter(Boolean);
 app.use(
   cors({
-    origin: process.env.APP_URL || "http://localhost:3000",
-    credentials: true
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const isAllowed = allowedOrigins.includes(origin) || /^https:\/\/next-blog-client.*\.vercel\.app$/.test(origin) || /^https:\/\/.*\.vercel\.app$/.test(origin);
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error(`Origin ${origin} not allowed by CORS`));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+    exposedHeaders: ["Set-Cookie"]
   })
 );
 app.use(express8.json());
