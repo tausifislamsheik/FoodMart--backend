@@ -46,7 +46,7 @@ const auth = (...roles: UserRole[]) => {
       if (roles.length && !roles.includes(req.user.role as UserRole)) {
         return res.status(403).json({
           success: false,
-          message: "Forbidden!",
+          message: "Forbidden! You don't have enough permission to access this resource.",
         });
       }
 
