@@ -1939,7 +1939,9 @@ router7.delete("/:id", auth_default("CUSTOMER" /* CUSTOMER */), cartController.d
 var cartRouter = router7;
 
 // src/app.ts
+import cookieParser from "cookie-parser";
 var app = express8();
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin: process.env.APP_URL,
@@ -1947,6 +1949,7 @@ app.use(
     credentials: true
   })
 );
+app.use(cookieParser());
 app.use(express8.json());
 app.all("/api/auth/*splat", toNodeHandler(auth));
 app.use("/api/users", userRouter);
