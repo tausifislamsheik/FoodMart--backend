@@ -13,22 +13,27 @@ import { reviewRouter } from "./modules/review/review.router";
 import { cartRouter } from "./modules/cart/cart.router";
 import cookieParser from "cookie-parser";
 
-
-
 const app: Application = express();
 
-
 // Trust Vercel Proxy (Needed for "secure: true" cookies)
-app.set("trust proxy", 1); 
+app.set("trust proxy", 1);
+
+app.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  async (req: Request, res: Response) => {
+    console.log("Webhook received", req.body);
+  },
+);
 
 app.use(
   cors({
     origin: process.env.APP_URL,
-    credentials: true
+    credentials: true,
   }),
 );
 
-// Cookie parser 
+// Cookie parser
 app.use(cookieParser());
 
 app.use(express.json());
