@@ -4,7 +4,7 @@ import { UserRole } from "../middlewares/auth";
 async function seedAdmin() {
   try {
     const adminData = {
-      name: "Mr.Admin",
+      name: "Admin",
       email: process.env.ADMIN_EMAIL!,
       role: UserRole.ADMIN,
       password: process.env.ADMIN_PASS,

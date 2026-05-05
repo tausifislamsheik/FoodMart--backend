@@ -35,12 +35,26 @@ const createProviderProfile = async (
 // Get All Providers
 
 const getAllProviders = async () => {
-  return prisma.providerProfile.findMany({
+  const providers = await prisma.providerProfile.findMany({
     include: {
       meals: true,
       orders: true,
     },
   });
+
+  // Fetch user emails for all providers
+  const userIds = providers.map((p) => p.userId);
+  const users = await prisma.user.findMany({
+    where: { id: { in: userIds } },
+    select: { id: true, email: true },
+  });
+
+  const userMap = new Map(users.map((u) => [u.id, u.email]));
+
+  return providers.map((provider) => ({
+    ...provider,
+    user: { email: userMap.get(provider.userId) || null },
+  }));
 };
 
 

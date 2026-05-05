@@ -1,5 +1,5 @@
 import { toNodeHandler } from "better-auth/node";
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import { auth } from "./lib/auth";
 import cors from "cors";
 import { providerRouter } from "./modules/provider/provider.router";
@@ -18,6 +18,7 @@ const app: Application = express();
 // Trust Vercel Proxy (Needed for "secure: true" cookies)
 app.set("trust proxy", 1);
 
+// Generic webhook endpoint
 app.post(
   "/webhook",
   express.raw({ type: "application/json" }),
