@@ -1,6 +1,6 @@
 <div align="center">
 
-## 🍽️ FoodMart Server
+# 🍽️ FoodMart Server
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)
