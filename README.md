@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🍽️ FoodMart Server
+## 🍽️ FoodMart Server
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)
@@ -368,18 +368,6 @@ ADMIN_PASS="your-secure-password"
 3. Webhook updates payment status
 4. Order status updated automatically on successful payment -->
 
----
-
-## 📸 Screenshots
-
-<div align="center">
-
-**API Health Check**
-```
-GET /
-Response: "FoodMart server is running...."
-```
-
 </div>
 
 ---
@@ -403,6 +391,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 <div align="center">
 
-Built with for food lovers everywhere.
+Built for food lovers everywhere.
 
 </div>
